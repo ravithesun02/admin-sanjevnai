@@ -1,10 +1,38 @@
 import React ,{Component} from 'react';
+import Toast from 'react-bootstrap/Toast';
 import './login.css';
-
+var userName = null ,password = null;
 class Login extends Component{
     constructor(props)
     {
         super(props);
+        this.state={
+          showTost:false,
+        }
+    }
+  
+    user(e){
+      userName = e.target.value
+      //console.log(userName)
+    }
+    password(e){
+      password = e.target.value
+      //console.log(password)
+    }
+    handleSubmit(){
+      //alert(JSON.stringify(userName))
+      if( userName===null || userName===""){
+       // this.state.showTost=true
+       return( 
+         <div>
+          <Toast >
+              <Toast.Header>
+                <strong>ENTER USER_NAME</strong>
+              </Toast.Header>
+          </Toast>
+          </div>
+        );
+      }
     }
     render()
     {
@@ -18,35 +46,20 @@ class Login extends Component{
     </div>
     <div class='box-login'>
       <div class='fieldset-body' id='login_form'>
-        <button onclick="openLoginInfo();" class='b b-form i i-more' title='Info'></button>
         <p class='field'>
-          <label for='user'>E-MAIL</label>
-          <input type='text' id='user' name='user' title='Username' />
+          <label for='user'>USER_NAME</label>
+          <input type='text' id='user' name='user' title='Username' onChange={this.user} />
           <span id='valida' class='i i-warning'></span>
         </p>
         <p class='field'>
           <label for='pass'>PASSWORD</label>
-          <input type='password' id='pass' name='pass' title='Password' />
+          <input type='password' id='pass' name='pass' title='Password' onChange={this.password} />
           <span id='valida' class='i i-close'></span>
         </p>
 
-        <label class='checkbox'>
-          <input type='checkbox' value='TRUE' title='Keep me Signed in' /> Keep me Signed in
-        </label>
-
-        <input type='submit' id='do_login' value='GET STARTED' title='Get Started' />
+        <input type='submit' id='do_login' value='GET STARTED' title='Get Started' onClick={this.handleSubmit} />
       </div>
     </div>
-  </div>
-  <div class='box-info'>
-    <p><button onclick="closeLoginInfo();" class='b b-info i i-left' title='Back to Sign In'></button>
-      <h3>Need Help?</h3>
-    </p>
-    <div class='line-wh'></div>
-    <button onclick="" class='b-support' title='Forgot Password?'> Forgot Password?</button>
-    <button onclick="" class='b-support' title='Contact Support'> Contact Support</button>
-    <div class='line-wh'></div>
-    <button onclick="" class='b-cta' title='Sign up now!'> CREATE ACCOUNT</button>
   </div>
 </div>
         )
