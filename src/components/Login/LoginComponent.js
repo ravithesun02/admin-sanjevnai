@@ -86,9 +86,11 @@ class Login extends Component{
       userName=userName.trim();
       if(userName===""){
         toast.error('Username cannot be empty',{position:toast.POSITION.TOP_CENTER});
+        this.setState({isLoading:false});
       }
       if(passWord==='')
       toast.error('Password must not be empty',{position:toast.POSITION.TOP_CENTER});
+      this.setState({isLoading:false});
 
       if(userName!=='' && passWord!=='')
         this.getLOginDone();
