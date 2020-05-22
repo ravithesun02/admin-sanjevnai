@@ -72,7 +72,7 @@ export default class AdminMap extends React.PureComponent  {
 
     const value=JSON.parse(localStorage.getItem('location'));
    
-        console.log('called');
+      //  console.log('called');
           if(value!==null)
            isLoggedIn=true;
           else
@@ -105,7 +105,7 @@ export default class AdminMap extends React.PureComponent  {
             },
           });
           socket.on('FromAPI',data=>{
-            console.log(data);
+           // console.log(data);
               this.setResponse(data);
           });
 
@@ -129,7 +129,7 @@ showPopUp=async()=>{
         
         let userDATA=[];
         userDATA.push(user.user);
-        console.log(user.user);
+      //  console.log(user.user);
 
        await this.setState({userdata:user.user,dataSet:true});
 
@@ -138,7 +138,7 @@ showPopUp=async()=>{
   }
   catch(error)
   {
-    console.log(error);
+   // console.log(error);
     toast.error(error,{position:toast.POSITION.TOP_CENTER,autoClose:false});
   }
 }
