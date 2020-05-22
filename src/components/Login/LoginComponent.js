@@ -3,6 +3,8 @@ import {toast} from 'react-toastify';
 import './login.css';
 import {baseURL} from '../../reuse/baseURL';
 import { Redirect } from 'react-router-dom';
+import Loader from 'react-loader-spinner';
+import Loading from '../../reuse/LoadingComponent';
 
 var userName = '';
 var passWord = '';
@@ -12,7 +14,8 @@ class Login extends Component{
     {
         super(props);
         this.state={
-            loggedIn_DC:false
+            loggedIn_DC:false,
+            isLoading:false
         }
     }
   
@@ -61,17 +64,24 @@ class Login extends Component{
                 }
                 localStorage.setItem('location',JSON.stringify(location));
                 toast.success('Signed In successfully!',{position:toast.POSITION.TOP_CENTER});
-                this.setState({loggedIn_DC:true});
+                this.setState({loggedIn_DC:true,isLoading:false});
             }
                 
 
 
+        }
+        else
+        {
+          toast.error('Wrong username/password !!!',{position:toast.POSITION.TOP_CENTER});
+          this.setState({isLoading:false});
+          return;
         }
 
     }
 
     handleSubmit=()=>{
       //alert(JSON.stringify(userName))
+      this.setState({isLoading:true});
       console.log(userName);
       userName=userName.trim();
       if(userName===""){
@@ -82,6 +92,8 @@ class Login extends Component{
 
       if(userName!=='' && passWord!=='')
         this.getLOginDone();
+
+      
     }
 
 
@@ -95,6 +107,10 @@ class Login extends Component{
             return <Redirect to="/admin"/>
         }
 
+        else if(this.state.isLoading)
+        {
+          return <Loading/>
+        }
         else
 
         return(
