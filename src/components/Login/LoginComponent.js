@@ -28,7 +28,7 @@ class Login extends Component{
 
     user(e){
       userName = e.target.value
-      console.log(userName)
+     // console.log(userName)
     }
     password(e){
       passWord = e.target.value;
@@ -52,7 +52,7 @@ class Login extends Component{
         {
             let DATA=await res.json();
 
-            console.log(DATA);
+           // console.log(DATA);
 
             localStorage.setItem('token',DATA.Token);
 
@@ -65,6 +65,8 @@ class Login extends Component{
                 localStorage.setItem('location',JSON.stringify(location));
                 toast.success('Signed In successfully!',{position:toast.POSITION.TOP_CENTER});
                 this.setState({loggedIn_DC:true,isLoading:false});
+                userName='';
+                passWord='';
             }
                 
 
@@ -82,15 +84,18 @@ class Login extends Component{
     handleSubmit=()=>{
       //alert(JSON.stringify(userName))
       this.setState({isLoading:true});
-      console.log(userName);
+     // console.log(userName);
       userName=userName.trim();
       if(userName===""){
         toast.error('Username cannot be empty',{position:toast.POSITION.TOP_CENTER});
         this.setState({isLoading:false});
       }
       if(passWord==='')
-      toast.error('Password must not be empty',{position:toast.POSITION.TOP_CENTER});
-      this.setState({isLoading:false});
+      {
+        toast.error('Password must not be empty',{position:toast.POSITION.TOP_CENTER});
+        this.setState({isLoading:false});
+      }
+    
 
       if(userName!=='' && passWord!=='')
         this.getLOginDone();
